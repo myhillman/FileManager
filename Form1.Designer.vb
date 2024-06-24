@@ -26,6 +26,7 @@ Partial Class Form1
         DuplicateProgramFilesToolStripMenuItem = New ToolStripMenuItem()
         ShortcutsToFToolStripMenuItem = New ToolStripMenuItem()
         DuplicateProgramFilesToolStripMenuItem1 = New ToolStripMenuItem()
+        RemoveStrangeCharactersToolStripMenuItem = New ToolStripMenuItem()
         MenuStrip1.SuspendLayout()
         SuspendLayout()
         ' 
@@ -40,7 +41,7 @@ Partial Class Form1
         ' 
         ' DuplicateProgramFilesToolStripMenuItem
         ' 
-        DuplicateProgramFilesToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {ShortcutsToFToolStripMenuItem, DuplicateProgramFilesToolStripMenuItem1})
+        DuplicateProgramFilesToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {ShortcutsToFToolStripMenuItem, DuplicateProgramFilesToolStripMenuItem1, RemoveStrangeCharactersToolStripMenuItem})
         DuplicateProgramFilesToolStripMenuItem.Name = "DuplicateProgramFilesToolStripMenuItem"
         DuplicateProgramFilesToolStripMenuItem.Size = New Size(73, 20)
         DuplicateProgramFilesToolStripMenuItem.Text = "File Check"
@@ -48,14 +49,20 @@ Partial Class Form1
         ' ShortcutsToFToolStripMenuItem
         ' 
         ShortcutsToFToolStripMenuItem.Name = "ShortcutsToFToolStripMenuItem"
-        ShortcutsToFToolStripMenuItem.Size = New Size(199, 22)
+        ShortcutsToFToolStripMenuItem.Size = New Size(216, 22)
         ShortcutsToFToolStripMenuItem.Text = "Shortcuts to F:"
         ' 
         ' DuplicateProgramFilesToolStripMenuItem1
         ' 
         DuplicateProgramFilesToolStripMenuItem1.Name = "DuplicateProgramFilesToolStripMenuItem1"
-        DuplicateProgramFilesToolStripMenuItem1.Size = New Size(199, 22)
+        DuplicateProgramFilesToolStripMenuItem1.Size = New Size(216, 22)
         DuplicateProgramFilesToolStripMenuItem1.Text = "Duplicate Program Files"
+        ' 
+        ' RemoveStrangeCharactersToolStripMenuItem
+        ' 
+        RemoveStrangeCharactersToolStripMenuItem.Name = "RemoveStrangeCharactersToolStripMenuItem"
+        RemoveStrangeCharactersToolStripMenuItem.Size = New Size(216, 22)
+        RemoveStrangeCharactersToolStripMenuItem.Text = "Remove strange characters"
         ' 
         ' Form1
         ' 
@@ -76,5 +83,6 @@ Partial Class Form1
     Friend WithEvents DuplicateProgramFilesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ShortcutsToFToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DuplicateProgramFilesToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents RemoveStrangeCharactersToolStripMenuItem As ToolStripMenuItem
 
 End Class
