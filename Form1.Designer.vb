@@ -27,6 +27,7 @@ Partial Class Form1
         ShortcutsToFToolStripMenuItem = New ToolStripMenuItem()
         DuplicateProgramFilesToolStripMenuItem1 = New ToolStripMenuItem()
         RemoveStrangeCharactersToolStripMenuItem = New ToolStripMenuItem()
+        TextBox1 = New TextBox()
         MenuStrip1.SuspendLayout()
         SuspendLayout()
         ' 
@@ -35,7 +36,7 @@ Partial Class Form1
         MenuStrip1.Items.AddRange(New ToolStripItem() {DuplicateProgramFilesToolStripMenuItem})
         MenuStrip1.Location = New Point(0, 0)
         MenuStrip1.Name = "MenuStrip1"
-        MenuStrip1.Size = New Size(800, 24)
+        MenuStrip1.Size = New Size(1131, 24)
         MenuStrip1.TabIndex = 0
         MenuStrip1.Text = "MenuStrip1"
         ' 
@@ -64,11 +65,21 @@ Partial Class Form1
         RemoveStrangeCharactersToolStripMenuItem.Size = New Size(216, 22)
         RemoveStrangeCharactersToolStripMenuItem.Text = "Remove strange characters"
         ' 
+        ' TextBox1
+        ' 
+        TextBox1.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
+        TextBox1.Location = New Point(12, 47)
+        TextBox1.Multiline = True
+        TextBox1.Name = "TextBox1"
+        TextBox1.Size = New Size(1106, 451)
+        TextBox1.TabIndex = 1
+        ' 
         ' Form1
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(800, 450)
+        ClientSize = New Size(1131, 507)
+        Controls.Add(TextBox1)
         Controls.Add(MenuStrip1)
         MainMenuStrip = MenuStrip1
         Name = "Form1"
@@ -84,5 +95,6 @@ Partial Class Form1
     Friend WithEvents ShortcutsToFToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DuplicateProgramFilesToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents RemoveStrangeCharactersToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents TextBox1 As TextBox
 
 End Class

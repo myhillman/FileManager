@@ -1,5 +1,6 @@
 ﻿Imports System.IO
 Imports System.Text.RegularExpressions
+Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 
 Public Class Form1
     Private Sub ShortcutsToFToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShortcutsToFToolStripMenuItem.Click
@@ -37,10 +38,10 @@ Public Class Form1
 
     Private Sub RemoveStrangeCharactersToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RemoveStrangeCharactersToolStripMenuItem.Click
         ' Remove strange characters from files on "Kids videos" drive
-        Const VolumeLabel = "Kids videos"       ' Volume lable for kids videos HDD
+        Const VolumeLabel = "Kids videos"       ' Volume label for kids videos HDD
         Dim files() As String, unsafe As Integer = 0, maxFileLength As Integer = 0, maxFile As String = "", targetDrive = Nothing
         Dim drives = My.Computer.FileSystem.Drives      ' List all drives
-
+        TextBox1.AppendText($"Removing strange characters from files{vbCrLf}")
         Try
             targetDrive = drives.First(Function(drive) drive.IsReady AndAlso drive.VolumeLabel = VolumeLabel)     ' get the Kids videos drive
         Catch
@@ -48,8 +49,20 @@ Public Class Form1
         If targetDrive Is Nothing Then
             MsgBox($"Could not find a drive with volume label '{VolumeLabel}'", vbCritical + vbOKOnly, "Drive not found")
         Else
+            ' Top level folders must start with uppercase
+            Dim toplevel = Directory.GetDirectories(targetDrive.ToString, "*", SearchOption.TopDirectoryOnly)
+            TextBox1.AppendText($"Processing {targetDrive}{VolumeLabel}: {toplevel.Count} top level folders{vbCrLf}")
+            toplevel = Array.ConvertAll(toplevel, Function(x) Strings.Right(x, Len(x) - 3))     ' remove the drive letter
+            Dim illegal = toplevel.Where(Function(x) Not (x = "$RECYCLE.BIN" Or (x(0) >= "A" And x(0) <= "Z"))).ToList
+            If illegal.Any Then
+                For Each ill In illegal
+                    TextBox1.AppendText($"ERROR: Top level directory {ill} is illegal - must start upper case{vbCrLf}")
+                Next
+                Exit Sub
+            End If
+            ' Check for illegal characters
             files = GetFilesRecursively(targetDrive.Name, "*.mp4")         ' get list of all mp4 files
-            Debug.WriteLine($"{files.Length} files found")
+            TextBox1.AppendText($"{files.Length} files found{vbCrLf}")
             For Each file In files
                 ' Remember longest file name. I think the limit is 127
                 If file.Length > maxFileLength Then
@@ -62,11 +75,11 @@ Public Class Form1
                     unsafe += 1
                     safefile = Path.GetFileName(safefile)
                     My.Computer.FileSystem.RenameFile(file, safefile)      ' rename the file
-                    Debug.WriteLine($"Renaming {file} to {safefile}")
+                    TextBox1.AppendText($"Renaming {file} to {safefile}{vbCrLf}")
                 End If
             Next
-            Debug.WriteLine($"{unsafe} unsafe filenames fixed")
-            Debug.WriteLine($"Longest file name was {maxFile} ({maxFileLength})")
+            TextBox1.AppendText($"{unsafe} unsafe filenames fixed{vbCrLf}")
+            TextBox1.AppendText($"Longest file name was {maxFile} ({maxFileLength}){vbCrLf}")
         End If
     End Sub
     Public Shared Function GetFilesRecursively(path As String, searchPattern As String) As String()
